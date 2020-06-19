@@ -1,3 +1,4 @@
+print(2 + 3)
 
 num1 = 10
 num2 = 1.5
@@ -35,6 +36,7 @@ print(greeting2)
 
 baseball = ['Yankees', 'Astros', 'Marlins']
 print(baseball[-2])
+
 player_stats = {'Batting Average': '.340', 'Slugging': '1.028', 'RBI': '500'}
 print(player_stats['Slugging'])
 player_stats.update({'Total Bases': '540'})
