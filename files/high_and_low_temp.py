@@ -1,5 +1,11 @@
 # https://dataverse.harvard.edu/dataset.xhtml?persistentId=doi:10.7910/DVN/FIE0S4
 
+
+def cel_to_far(c):
+    far_temp = c*(9/5) + 32
+    return far_temp
+
+
 file_path = 'C:/Users/Adrian Cardenas/Downloads/Climate_HourlyWeather.csv'
 
 high = -1000
@@ -26,6 +32,9 @@ with open(file_path, 'r') as handle:
             low = temp
             low_date = str(data[0])
 
-print('high', high, 'date:', high_date)
-print('low', low, 'date:', low_date)
+print('high', cel_to_far(high), 'date:', high_date)
+print('low', cel_to_far(low), 'date:', low_date)
+
+
+
 
