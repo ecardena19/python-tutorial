@@ -17,5 +17,18 @@ with open(file_path, 'r') as handle:
         temp = float(data[6])
         lis_temp.append(temp)
 
-avg_temp = sum(lis_temp)/len(lis_temp)
+avg_temp = sum(lis_temp) / len(lis_temp)
+
+median_temp = 0.0
+
+lis_temp.sort()
+
+if len(lis_temp) % 2 == 0:
+    median1 = lis_temp[len(lis_temp) // 2]
+    median2 = lis_temp[len(lis_temp) // 2 - 1]
+    median_temp = (median1 + median2) / 2
+else:
+    median_temp = lis_temp[len(lis_temp) // 2]
+
 print('Average Temperature:', f'{avg_temp:.1f}')
+print('Median Temperature:', f'{median_temp:.1f}')
