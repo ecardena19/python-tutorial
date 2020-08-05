@@ -46,7 +46,6 @@ for line in hourly.data():
     if data[8] == '':
         continue
 
-    # class -> json -> class -> __str__
     climate_hour = ClimateHour(
         line_count,
         str(data[0]),
@@ -55,7 +54,4 @@ for line in hourly.data():
     )
 
     climate_hour_json = json.dumps(climate_hour.__dict__)
-
-    climate_hour2 = ClimateHour.from_json(climate_hour_json)
-
-    print(climate_hour2)
+    print(climate_hour_json)
