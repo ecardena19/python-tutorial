@@ -1,4 +1,5 @@
 from climate import hourly
+import json
 
 
 class ClimateHour(object):
@@ -23,6 +24,11 @@ class ClimateHour(object):
             self.dew_point
         )
 
+    @classmethod
+    def from_json(cls, json_str):
+        json_dict = json.loads(json_str)
+        return ClimateHour(**json_dict)
+
 
 # convert csv data to a class, then print as JSON
 
@@ -40,6 +46,7 @@ for line in hourly.data():
     if data[8] == '':
         continue
 
+    # class -> json -> class -> __str__
     climate_hour = ClimateHour(
         line_count,
         str(data[0]),
@@ -47,4 +54,8 @@ for line in hourly.data():
         float(data[8])
     )
 
-    print(climate_hour)
+    climate_hour_json = json.dumps(climate_hour.__dict__)
+
+    climate_hour2 = ClimateHour.from_json(climate_hour_json)
+
+    print(climate_hour2)
