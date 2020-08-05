@@ -5,19 +5,22 @@ class ClimateHour(object):
     line_no = 0
     date = None
     temp = None
+    dew_point = None
 
     # constructor
-    def __init__(self, line_no, date, temp):
+    def __init__(self, line_no, date, temp, dew_point):
         self.line_no = line_no
         self.temp = temp
         self.date = date
+        self.dew_point = dew_point
 
     # override default str implementation
     def __str__(self):
-        return "Line#: {} Date: {} Temp: {}".format(
+        return "Line#: {} Date: {} Temp: {} Dew Point: {}".format(
             self.line_no,
             self.date,
-            self.temp
+            self.temp,
+            self.dew_point
         )
 
 
@@ -34,11 +37,14 @@ for line in hourly.data():
     data = line.split(',')
     if data[6] == '':
         continue
+    if data[8] == '':
+        continue
 
     climate_hour = ClimateHour(
         line_count,
         str(data[0]),
-        float(data[6])
+        float(data[6]),
+        float(data[8])
     )
 
     print(climate_hour)
