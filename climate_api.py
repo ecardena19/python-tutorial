@@ -75,6 +75,11 @@ def hello_name(name):
     return 'Hello, {}!'.format(name)
 
 
-# start the http server
-app.run()
+@app.route('/hello/<name>.json')
+def hello_name_json(name):
+    text = 'Hello, {}!'.format(name)
+    return {'text': text}
 
+
+# start the http server
+app.run(debug=True)
