@@ -1,4 +1,5 @@
 from climate import hourly
+from flask import Flask
 import json
 
 
@@ -26,6 +27,10 @@ class ClimateHour(object):
 
     @classmethod
     def from_json(cls, json_str):
+        """
+        Given a JSON ClimateHour string, convert to ClimateHour
+        instance.
+        """
         json_dict = json.loads(json_str)
         return ClimateHour(**json_dict)
 
@@ -54,4 +59,22 @@ for line in hourly.data():
     )
 
     climate_hour_json = json.dumps(climate_hour.__dict__)
-    print(climate_hour_json)
+    # print(climate_hour_json)
+
+
+app = Flask(__name__)
+
+
+@app.route('/')
+def hello_world():
+    return 'Hello, World!'
+
+
+@app.route('/hello/<name>')
+def hello_name(name):
+    return 'Hello, {}!'.format(name)
+
+
+# start the http server
+app.run()
+
