@@ -1,6 +1,3 @@
-test = '3'
-
-
 def data():
     file_path = 'C:/Users/Adrian Cardenas/Downloads/Climate_HourlyWeather.csv'
     lines = []
