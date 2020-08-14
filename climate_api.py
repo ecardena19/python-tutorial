@@ -1,4 +1,5 @@
 from climate import hourly
+from datetime import datetime
 from flask import Flask
 import json
 
@@ -61,7 +62,6 @@ for line in hourly.data():
     climate_hour_json = json.dumps(climate_hour.__dict__)
     # print(climate_hour_json)
 
-
 app = Flask(__name__)
 
 
@@ -79,6 +79,12 @@ def hello_name(name):
 def hello_name_json(name):
     text = 'Hello, {}!'.format(name)
     return {'text': text}
+
+
+@app.route('/time.json')
+def date_time_json():
+    text = datetime.utcnow()
+    return {'date': text}
 
 
 # start the http server
