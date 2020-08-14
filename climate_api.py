@@ -91,9 +91,18 @@ def date_time_json():
     text = datetime.utcnow()
     return {'date': text}
 
-# /climate.json?date=2012-10-01-12
-# /climate.json?date=2013-10-03-12
 
+# /climate/2012-10-01-12.json
+# /climate/2013-10-03-12.json
+
+# climate_hours['2013-10-03-12'] = ClimateHour(...)
+
+@app.route('/climate/<date_hour>.json')
+def climate_json(date_hour):
+    # date_hour = date
+    result = climate_hours[date_hour]
+    return {'date_hour': result.__dict__}
+    # return {'date_hour': climate_hours[date_hour]}
 
 
 # start the http server
