@@ -43,6 +43,7 @@ class ClimateHour(object):
 # [{temp: 10.4, weather: "Rainy", rel_humidity: 23.3}, {temp: ...}]
 
 line_count = 0
+climate_hours = {}
 
 for line in hourly.data():
     line_count = line_count + 1
@@ -52,14 +53,18 @@ for line in hourly.data():
     if data[8] == '':
         continue
 
+    # "4/1/2012  12:00:00" -> datetime -> strftime('%Y-%m-%d-%h')
+    date = datetime.strptime(data[0], '%Y-%m-%d %H:%M')
     climate_hour = ClimateHour(
         line_count,
-        str(data[0]),
+        date,
         float(data[6]),
         float(data[8])
     )
+    key = climate_hour.date.strftime('%Y-%m-%d-%H')
+    climate_hours[key] = climate_hour
 
-    climate_hour_json = json.dumps(climate_hour.__dict__)
+    # climate_hour_json = json.dumps(climate_hour.__dict__)
     # print(climate_hour_json)
 
 app = Flask(__name__)
@@ -85,6 +90,10 @@ def hello_name_json(name):
 def date_time_json():
     text = datetime.utcnow()
     return {'date': text}
+
+# /climate.json?date=2012-10-01-12
+# /climate.json?date=2013-10-03-12
+
 
 
 # start the http server
